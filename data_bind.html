@@ -1,0 +1,118 @@
+<!doctype html>
+<html>
+<head>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+</head>
+<body>
+    <div> D3 Data Binding </div>
+    <p>D3 Tutorial</p>
+    <p></p>
+    <p></p>
+    <div id="Ford"></div>
+    <div id="Jarrah"></div>
+    <div id="Kwon"></div>
+    <div id="Locke"></div>
+    <div id="Reyes"></div>
+    <div id="Shephard"></div>
+    <script>
+        /*** Join data to existing element ***/
+        //var myData = ["Hello World!"];
+        
+        
+        /*** Will not work without array ***/
+        //var myData = 100;
+        
+        
+        /*** Join data to multiple elements ***/
+        var myData = ["Hello World!", "Hello D3","Hello JavaScript"];
+        
+        var p = d3.select("body").selectAll("p").data(myData).text(function (d){
+            return d;
+        });
+        
+        /*** enter function for dynamically creating placeholders ***/
+        var data = [4, 1, 6, 2, 8, 9];
+        /*var body = d3.select("body")  //selects the html body
+                .selectAll("span")  //if there is no span element it will return an empty array
+                .data(data) //code will run based on the input size
+                .enter()    //checks for span elements. if not finds creates span elements
+                .append("span") //append spans in body
+                .text(function(d) { return d + " "; }); //adds numbers from data array as text to span selections and prints*/
+        
+        /*** Change text color ***/
+        d3.select("body")
+            .selectAll("span")
+            .data(data)
+            .enter().append("span")
+            .style("color", function(d) {
+                if (d % 2 === 0) {
+                    return "green";
+                } else {
+                    return "red";
+                }
+            }).text(function(d) { return d + " "; });
+        
+        /*** Remove a node using exit and remove method ***/
+        var myData = ["Hello World!"];
+
+        var p = d3.select("body")
+                    .selectAll("p")
+                    .data(myData)
+                    .text(function (d, i) {
+                        return d;
+                    })
+                    .exit()
+                    .remove();
+        
+        /*** Static visualization using datam method ***/
+        d3.select("body")
+            .select("p")
+            .datum(100)
+            .text(function (d, i) {
+                return d;
+            });
+        
+        /*** Joining data ***/
+        var matrix = [
+            [11975,  5871, 8916, 2868],
+            [ 1951, 10048, 2060, 6171],
+            [ 8010, 16145, 8090, 8045],
+            [ 1013,   990,  940, 6907]
+        ];
+        
+        var tr = d3.select("body")
+            .append("table")
+            .selectAll("tr")
+            .data(matrix)
+            .enter().append("tr");
+        
+        var td = tr.selectAll("td")
+            .data(function(d) {
+                return d;
+            })
+            .enter().append("td")
+            .style("color", function(d) {
+                if (d % 2 === 0) {
+                    return "green";
+                } else {
+                    return "red";
+                }
+            })
+            .text(function(d) { return d;})
+        
+        var datas = [
+          {name: "Locke", number: 4},
+          {name: "Reyes", number: 8},
+          {name: "Ford", number: 15},
+          {name: "Jarrah", number: 16},
+          {name: "Shephard", number: 31},
+          {name: "Kwon", number: 34}
+        ];
+        
+        d3.selectAll("div")
+            .data(data, function(d) { return d ? d.name : this.id; })
+            .text(function(d) { return d.number; });
+
+    </script>
+</body>
+</html>

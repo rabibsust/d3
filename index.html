@@ -1,0 +1,87 @@
+<!doctype html>
+<html>
+<head>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <style>
+        .error {
+            color: 'red'
+        }
+    </style>
+</head>
+<body>
+    <p>First paragraph</p>
+    <p>Second paragraph</p>
+    <p id="p3">Third paragraph</p>
+    <p class="pc">Fourth paragraph</p>
+    <p class="pc">Fifth paragraph</p>
+    <table>
+    <tr>
+        <td>
+            One
+        </td>
+        <td>
+            Two
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Three
+        </td>
+        <td>
+            Four
+        </td>
+    </tr>
+    </table>
+    <div>
+        <p id="pr"></p>
+    </div>
+    <p></p>
+     <label>D3</label><input type="checkbox" />
+     <label>jQuery</label><input type="checkbox" />
+    <p class="w">Error: This is dummy error.</p>
+    <p class="w">Warning:This is dummy warning.</p>
+    <script>
+        //d3.select("p").style("color", "red");
+        d3.select("#p3").style("color", "green");
+        //d3.selectAll("p").style("color", "green");
+        d3.selectAll(".pc").style("color", "red");
+        d3.select("tr").selectAll("td").style("background-color", "yellow");
+        d3.select("#pr").text("This is paragraph.");
+        d3.select("body").append("p").text("Third paragraph.").style("background-color", "yellow").style("color", "blue");
+        d3.select("div").insert("p").text("Second paragraph.");
+        //d3.select("p").remove();
+        //d3.select("p").html("<span>This was added in HTML</span>");
+        
+        d3.select("input").property("checked",true);
+        //Set attribute
+        //d3.select("p").attr("class","error");
+        //classed
+        //d3.select("p").classed('error', true);
+        
+        /*******Function of data***********/
+        var data = [1, 2, 3];
+        var paragraph = d3.select("body")
+                .selectAll("p")
+                .data(data)
+                .text(function (d, i) {
+                    console.log("d: " + d);
+                    console.log("i: " + i);
+                    console.log("this: " + this);
+
+                    return d;
+                });
+        
+        /******Setting attribute value dynamically******/
+        d3.selectAll(".w").style("color", function(d,i) {
+            var text = this.innerText;
+            
+            if(text.indexOf("Error") >= 0) {
+                 return "red";
+            } else if (text.indexOf("Warning") >= 0) {
+                return "orange";
+            }
+        });
+        
+    </script>
+</body>
+</html>
