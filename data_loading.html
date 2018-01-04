@@ -4,8 +4,8 @@
     <script src="https://d3js.org/d3.v4.min.js"></script>
 </head>
 <body>
-    <div> D3 Data Loadiing </div>
-    <p>D3 Tutorial</p>
+    <div> D3 Data Loading </div>
+    
     
     <script>
         /*d3.csv("/data/employee.csv", function(data) {
@@ -47,7 +47,7 @@
           console.log(data);
         });*/
         /*** Load Multiple files ***/
-        d3.queue()
+        /*d3.queue()
           .defer(d3.csv, "/data/employee.csv")
           .defer(d3.tsv, "/data/animals.tsv")
           .await(analyze);
@@ -57,7 +57,26 @@
 
           console.log(employee[0]);
           console.log(animals[0]);
-        }
+        }*/
+        
+        /*** Bind loaded data ***/
+        d3.json("/data/users.json", function(error, data) {
+            for (var i = 0; i < data.length; i++) {
+                console.log(data[i].name);
+                console.log(data[i].title);
+            }
+            if (error) {
+                return console.warn(error);
+            }
+            d3.select("body")
+            .selectAll("p")
+            .data(data)
+            .enter()
+            .append("p")
+            .text(function(d) {
+                return d.name + ", " + d.title;
+            });
+        });
     </script>
 </body>
 </html>

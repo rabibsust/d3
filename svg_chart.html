@@ -1,0 +1,133 @@
+<!doctype html>
+<html>
+<head>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+</head>
+<style>
+    svg rect {
+        fill: orange;
+    }
+
+    svg text {
+        fill:white;
+        font: 10px sans-serif;
+        text-anchor: end;
+    }
+</style>
+<body>
+    <div><h2>SVG Bar Chart</h2></div>
+    <div id="bar-chart"></div>
+    <div><h2>SVG Circle Chart</h2></div>
+    <div id="circle-chart"></div>
+    <script>
+        /***************************************************************************************************************************
+            D3 SVG Bar Chart
+            width : Width of the svg
+            scalefactor: Since our data values are too small, they need to be scaled to a pixel value that is visible on the screen.
+            barHeight: This is the static height of our horizontal bars.
+        ****************************************************************************************************************************/
+        
+        var data = [12,9,50];
+        
+        var width = 600,
+            scaleFactor = 10,
+            barHeight =20;
+        
+        var graph = d3.select("#bar-chart")
+                      .append("svg")
+                      .attr("width", width)
+                      .attr("height", barHeight * data.length);
+        
+        var bar = graph.selectAll("g")
+                       .data(data)
+                       .enter()
+                       .append("g")
+                       .attr("transform", function(d, i) {
+                           return "translate(0, " + i * barHeight + ")";
+                       });
+        bar.append("rect")
+            .attr("width", function(d) {
+                return d * scaleFactor;
+            })
+            .attr("height", barHeight - 1);
+        
+        bar.append("text")
+           .attr("x", function(d) {
+                return d * scaleFactor;
+            })
+           .attr("y", barHeight/2)
+           .attr("dy", ".35em")
+           .text(function (d) { return d; });
+        
+        /**************************************************************************************************************
+            D3 SVG Circle Chart
+            width : Width of the svg
+            height : Height of the svg
+            data : Data array with five numbers
+            colors : Array of colors. We will use this to give a color gradient to our circles - one color per circle.
+            svg : Append the SVG to the div. We also specify the width and height of our SVG
+            g : Creates group element to hold the circles
+                Binds data array to the group elements
+                Create placeholder for group elements
+                Appends group elements to the page
+                Position elements with respect to the origin. In this case, we are positioning it at the origin.
+                
+            Appends circle to the group.
+            
+            We set the x-coordinate of the center of each circle. 
+            Here, we are multiplying the circle's index with 100 and add some padding between the circles.
+            
+            we set the y-coordinate of the center of each circle. 
+            Because we want our circles oriented in the same line horizontally, 
+            we have kept the y-coordinate uniform across our circles.
+            
+            We set the radius of the circles
+            We fill the circes based on colors array elements
+        ***************************************************************************************************************/
+        var width = 600,
+            height = 500;
+        
+        var data = [10, 15, 20, 25, 30];
+        var colors = ['#ffffcc','#c2e699','#78c679','#31a354','#006837'];
+        
+        var svg = d3.select("#circle-chart")
+                    .append("svg")
+                    .attr("width", width)
+                    .attr("height", height);
+        
+        var g = svg.selectAll("g")
+                    .data(data)
+                    .enter()
+                    .append("g")
+                    .attr("transform", function(d, i) {
+                       return "translate(0, 0)"; 
+                    });
+        
+        g.append("circle")
+         .attr("cx",function(d, i) {
+            return (i * 100) + 50; 
+          })
+         .attr("cy",function(d, i) {
+            return 100; 
+          })
+         .attr("r",function(d) {
+            return d * 1.5; 
+          })
+         .attr("fill", function(d, i) {
+            return colors[i]; 
+          })
+        
+        g.append("text")
+         .attr("x", function(d, i) {
+             return i * 100 + 55;
+         })
+         .attr("y", 105)
+         .attr("stroke", "teal")
+         .attr("font-size", "12px")
+         .attr("font-family", "sans-serif")
+         .text(function(d) {
+             return d;
+         });
+    </script>
+</body>
+</html>

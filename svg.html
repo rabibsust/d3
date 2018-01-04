@@ -1,0 +1,181 @@
+<!doctype html>
+<html>
+<head>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+</head>
+<body>
+    <div> Create SVG elements using D3 </div>
+    
+    <script>
+        /*******************************************************************
+            SVG is an image that is text-based.
+            SVG is similar in structure to HTML
+            SVG sits in the DOM
+            SVG properties can be specified as attributes
+            SVG should have absolute positions relative to the origin (0, 0)
+        *********************************************************************/
+        
+        /********************************************************************
+            Line in SVG
+            x1: This is the x-coordinate of the first point
+            y1: This is the y-coordinate of the first point
+            x2: This is the x-coordinate of the second point
+            y2: This is the y-coordinate of the second point
+        ********************************************************************/
+        var width = 500;
+        var height = 200;
+        
+        
+        var svg = d3.select("body")
+                    .append("svg")
+                    .attr("height", height)
+                    .attr("width", width);
+        
+        svg.append("line")
+            .attr("x1", 100)
+            .attr("x2", 500)
+            .attr("y1", 100)
+            .attr("y2", 100)
+            .attr("stroke", "black")
+        
+        /**********************************************************************
+            Rectangle in SVG
+            x: This is the x-coordinate of the top-left corner of the rectangle
+            y: This is the y-coordinate of the top-left corner of the rectangle
+            width: This denotes the width of the rectangle
+            height: This denotes the height of the rectangle
+        ***********************************************************************/
+        var width = 200;
+        var height = 200;
+        
+        
+        var svg = d3.select("body")
+                    .append("svg")
+                    .attr("height", height)
+                    .attr("width", width);
+        
+        svg.append("rect")
+            .attr("x", 50)
+            .attr("y", 0)
+            .attr("width", 100)
+            .attr("height", 100)
+        
+        /***********************************************************
+            Circle in SVG
+            cx: This is the x-coordinate of the center of the circle
+            cy: This is the y-coordinate of the center of the circle
+            r: This denotes the radius of the circle
+        ************************************************************/
+        var width = 200;
+        var height = 200;
+        
+        
+        var svg = d3.select("body")
+                    .append("svg")
+                    .attr("height", height)
+                    .attr("width", width);
+        
+        svg.append("circle")
+            .attr("cx",70)
+            .attr("cy",60)
+            .attr("r",60)
+        
+        /***********************************************************
+            Ellipse in SVG
+            cx: This is the x-coordinate of the center of the circle
+            cy: This is the y-coordinate of the center of the circle
+            rx: This is the x radius of the circle
+            ry: This is the y radius of the circle
+        ************************************************************/
+        var width = 500;
+        var height = 300;
+        
+        /*** Create SVG element ***/
+        var svg = d3.select("body")
+                    .append("svg")
+                    .attr("height", height)
+                    .attr("width", width);
+        
+        svg.append("ellipse")
+            .attr("cx",250)
+            .attr("cy",60)
+            .attr("rx",150)
+            .attr("ry",60)
+        
+        /***********************************************************
+            Text on Ellipse in SVG
+            cx: This is the x-coordinate of the center of the circle
+            cy: This is the y-coordinate of the center of the circle
+            rx: This is the x radius of the circle
+            ry: This is the y radius of the circle
+        ************************************************************/
+        var width = 500;
+        var height = 300;
+        
+        /*** Create SVG element ***/
+        var svg = d3.select("body")
+                    .append("svg")
+                    .attr("height", height)
+                    .attr("width", width);
+        
+        /*** Create group element ***/
+        var g = svg.append("g")
+                    .attr("transform", function(d, i) {
+                        return "translate(0,0)"; 
+                    });
+        
+        /*** Create and append ellipse element into group ***/
+        g.append("ellipse")
+         .attr("cx",250)
+         .attr("cy",60)
+         .attr("rx",150)
+         .attr("ry",60);
+        
+        /*** Create and append text element into groups ***/
+        g.append("text")
+         .attr("x", 150)
+         .attr("y", 60)
+         .attr("stroke", "#fff")
+         .text("This is an Ellipse!");
+        
+        /********************************************************************
+            Styling SVG elements
+            SVG is an image that is text-based.
+            SVG is similar in structure to HTML
+            SVG sits in the DOM
+            SVG properties can be specified as attributes
+            SVG should have absolute positions relative to the origin (0, 0)
+        *********************************************************************/
+        var width = 500;
+        var height = 300;
+        
+        /*** Create SVG element ***/
+        var svg = d3.select("body")
+                    .append("svg")
+                    .attr("height", height)
+                    .attr("width", width);
+        
+        /*** Create group element ***/
+        var g = svg.append("g")
+                    .attr("transform", function(d, i) {
+                        return "translate(0,0)"; 
+                    });
+        
+        /*** Create and append ellipse element into group ***/
+        g.append("ellipse")
+         .attr("cx",250)
+         .attr("cy",60)
+         .attr("rx",150)
+         .attr("ry",60)
+         .attr("fill","#FFE100")
+         .attr("opacity",0.5);
+        
+        /*** Create and append text element into groups ***/
+        g.append("text")
+         .attr("x", 150)
+         .attr("y", 60)
+         .attr("stroke", "#3300FF")
+         .text("This is style Ellipse!");
+    </script>
+</body>
+</html>
